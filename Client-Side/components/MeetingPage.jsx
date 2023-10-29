@@ -19,6 +19,21 @@ export function MeetingPage() {
             s.emit("join", {
                 roomId
             })
+
+            window.navigator.mediaDevices.getUserMedia({
+                video: true
+            }).then(async (stream) => {
+                setVideoStream(stream);
+            });
+
+            s.on("localDescription", async ({ description }) => {
+                //Receiving video
+                let pc = new RTCPeerConnection({
+                    iceServers: {
+
+                    }
+                })
+            })
         })
     })
 
