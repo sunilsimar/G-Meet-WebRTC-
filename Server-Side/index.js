@@ -41,8 +41,59 @@ socket.on("join", (params)=>{
 
 socket.on("localDescription",(params)=>{
     let roomId = users[socket.id].roomId;
+    let otherUsers = rooms[roomId].users;
+
+    otherUsers.forEach(otherUser => {
+        if(otherUser !== socket.id){
+            io.to(otherUser).emit('localDescription',{
+                description: params.description
+            })
+        }
+    })
+});
+
+socket.io("remoteDescription", (params)=>{
+    let roomId = users[socket.id].roomId;
+    let otherUsers = rooms[roomId].users;
+
+    otherUsers.forEach(otherUser =>{
+        if(otherUser !== socket.id){
+            io.to(otherUser).emit("remoteDescription", {
+                description: params.description
+            })
+        }
+    })
+});
+
+socket.io("iceCandidate",(params)=>{
+    let roomId = users[socket.id].roomId;
+    let otherUsers = rooms[roomId].users;
+
+    otherUsers.forEach(otherUser =>{
+        if(otherUser !== socket.id){
+            io.to(otherUser).emit('iceCandidate',{
+                candidate: params.candidate
+            })
+        }
+    })
+});
+
+socket.io("iceCandidateReply",(params)=>{
+    let roomId = users[socket.id].roomId;
+    let otherUsers = rooms[roomId].users;
+
+    otherUsers.forEach(otherUser =>{
+        if(otherUser !== socket.id){
+            io.to(otherUser).emit('iceCandidateReply',{
+                candidate: params.candidate
+            })
+        }
+    })
+});
+
+server.listen(3000,()=>{
+    console.log("Listening on port 3000")
+});
+
 
    
-})
-
-socket.on('localDes')
