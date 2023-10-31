@@ -27,7 +27,7 @@ export function Appbar() {
             justifyContent: "space-between",
             padding: 4,
         }}>
-            <div style={{ display: 'flex', }}>
+            <div style={{ display: "flex" }}>
                 <VideocamOutlinedIcon fontSize="large"></VideocamOutlinedIcon>
                 <Typography variant="h5" fontStyle={'arabic'}>Google Meet</Typography>
             </div>
